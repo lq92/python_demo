@@ -2,7 +2,7 @@
 	定义一个私有属性：在属性前加双下划线(__)，这样的属性外部无法读取
 
 	在外部获取私有属性：定义新的方法来获取私有属性
-	在外部修改私有属性：定义新的方法来修改私有属性
+	在外部修改私有属性：定义新的方法来修改私有属性，可以在设置私有属性的时候加上限制条件来对设置的属性进行检查，符合条件修改，不符合条件抛出错误
 	约定：当属性以单下划线(_)开头的属性，视为私有属性，实际外部是可以访问和修改的
 
 	当在类的外部设置过私有变量后(instance.__property = xxx)，可以通过instance._class__property获取到私有变量，否则报错
@@ -18,6 +18,8 @@ class Student(object):
 	def get_name(self): 
 		return self.__name
 	def set_name(self, newName): 
+		if not isinstance(newName, str): 
+			raise ValueError('Value must be a string')
 		self.__name = newName		
 
 s1 = Student('Bill', 23, 98)
